@@ -17,7 +17,7 @@ stages:
     displayName: 'Build job'
     pool:
       vmImage: 'ubuntu-20.04'
-    environment: 'Dev'
+    environment: 'dev'
     steps:
     - task: Docker@2
       displayName: 'Build and push the image to container registry'
@@ -52,7 +52,7 @@ stages:
     displayName: Deploy
     pool:
       vmImage: 'ubuntu-20.04'
-    environment: 'Dev'
+    environment: 'dev'
     variables:
     - group: Release
     strategy:
@@ -68,8 +68,8 @@ stages:
                 action: createSecret
                 connectionType: azureResourceManager
                 secretName: $(imagePullSecret)
-                dockerRegistryEndpoint: 'Container Registry Connection'
-                azureSubscriptionConnection: 'Kubernetes Cluster Connection'
+                dockerRegistryEndpoint: 'acrdevopsmasaki.azurecr.io'
+                azureSubscriptionConnection: 'MSDN Platforms Subscription'
                 azureResourceGroup: 'tailspin-space-game-rg'
                 kubernetesCluster: 'tailspinspacegame-5455'
                 namespace: 'dev'
@@ -79,7 +79,7 @@ stages:
             inputs:
                 action: deploy
                 connectionType: azureResourceManager
-                azureSubscriptionConnection: 'Kubernetes Cluster Connection'
+                azureSubscriptionConnection: 'MSDN Platforms Subscription'
                 azureResourceGroup: 'tailspin-space-game-rg'
                 kubernetesCluster: 'tailspinspacegame-5455'
                 namespace: 'dev'
