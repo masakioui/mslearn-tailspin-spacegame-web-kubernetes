@@ -52,7 +52,7 @@ stages:
       vmImage: 'ubuntu-20.04'
     environment: 'dev'
     variables:
-    - group: Release
+    - group: 'Azure ENV'
     strategy:
       runOnce:
         deploy:
